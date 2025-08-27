@@ -23,11 +23,22 @@ database.connect();
 app.use(express.json());
 app.use(cookieParser());
 app.use(
-    cors({
-        origin: ["https://studynotion-seven-chi.vercel.app/","http://localhost:3000",],
-        credentials: true,
-    })
-)
+  cors({
+    origin: function (origin, callback) {
+      const allowedOrigins = [
+        "https://studynotion-seven-chi.vercel.app",
+        "http://localhost:3000"
+      ];
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true,
+  })
+);
+
 app.use(
     fileUpload({
         useTempFiles: true,
