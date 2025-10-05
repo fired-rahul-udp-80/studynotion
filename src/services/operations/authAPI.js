@@ -16,19 +16,19 @@ const {
 
 export function sendOtp(email, navigate) {
   return async (dispatch) => {
-    const toastId = toast.loading("Loading...")
     dispatch(setLoading(true))
     try {
+      console.log("Sending OTP to", email)
       const response = await apiConnector("POST", SENDOTP_API, {
         email,
         checkUserPresent: true,
       })
       console.log("SENDOTP API RESPONSE............", response)
 
-      console.log(response.data.success)
+      console.log(response?.data?.success)
 
-      if (!response.data.success) {
-        throw new Error(response.data.message)
+      if (!response?.data?.success) {
+        throw new Error(response?.data?.message)
       }
 
       toast.success("OTP Sent Successfully")
@@ -38,7 +38,7 @@ export function sendOtp(email, navigate) {
       toast.error("Could Not Send OTP")
     }
     dispatch(setLoading(false))
-    toast.dismiss(toastId)
+    
   }
 }
 
