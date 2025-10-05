@@ -184,52 +184,53 @@ exports.login = async (req, res) => {
 };
 // Send OTP For Email Verification
 exports.sendotp = async (req, res) => {
-	try {
-		// console.log("Request Body", req.body);
-		const { email } = req.body;
+  try {
+    const { email } = req.body;
 
-		// Check if user is already present
-		// Find user with provided email
-		const checkUserPresent = await User.findOne({ email });
-		// to be used in case of signup
+    // check if user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(401).json({
+        success: false,
+        message: "User is already registered",
+      });
+    }
 
-		// If user found with provided email
-		if (checkUserPresent) {
-			// Return 401 Unauthorized status code with error message
-			return res.status(401).json({
-				success: false,
-				message: `User is Already Registered`,
-			});
-		}
-		// Generate OTP
-		//console.log("Generating OTP");
-		var otp = otpGenerator.generate(6, {
-			upperCaseAlphabets: false,
-			lowerCaseAlphabets: false,
-			specialChars: false,
-		});
-		const result = await OTP.findOne({ otp: otp });
-		// console.log("Result is Generate OTP Func");
-		// console.log("OTP", otp);
-		// console.log("Result", result);
-		while (result) {
-			otp = otpGenerator.generate(6, {
-				upperCaseAlphabets: false,
-			});
-		}
-		const otpPayload = { email, otp };
-		 await OTP.create(otpPayload);
-		// console.log("OTP Body", otpBody);
-		res.status(200).json({
-			success: true,
-			message: `OTP Sent Successfully`,
-			otp,
-		});
-	} catch (error) {
-		console.log(error.message);
-		return res.status(500).json({ success: false, error: error.message });
-	}
+    // generate a 6-digit numeric OTP
+    let otp;
+    let existingOtp;
+
+    do {
+      otp = otpGenerator.generate(6, {
+        upperCaseAlphabets: false,
+        lowerCaseAlphabets: false,
+        specialChars: false,
+      });
+      existingOtp = await OTP.findOne({ otp });
+    } while (existingOtp);
+
+    // if OTP already exists for this email, delete it (optional)
+    await OTP.deleteMany({ email });
+
+    // create new OTP document
+    const otpDoc = await OTP.create({ email, otp });
+
+    // send success response
+    return res.status(200).json({
+      success: true,
+      message: "OTP generated successfully",
+      otp,
+    });
+
+  } catch (error) {
+    console.error("SENDOTP ERROR >>>", error);
+    return res.status(500).json({
+      success: false,
+      error: error.message,
+    });
+  }
 };
+
 
 // Controller for Changing Password
 exports.changePassword = async (req, res) => {
