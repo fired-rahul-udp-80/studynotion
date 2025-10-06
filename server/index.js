@@ -27,7 +27,8 @@ app.use(
     origin: function (origin, callback) {
       const allowedOrigins = [
         "https://studynotion-seven-chi.vercel.app",
-        "http://localhost:3000"
+        "http://localhost:3000",
+        "https://skilledges.vercel.app"
       ];
       if (!origin || allowedOrigins.includes(origin)) {
         callback(null, true);
