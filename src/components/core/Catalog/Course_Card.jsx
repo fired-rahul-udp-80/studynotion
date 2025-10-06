@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react"
-// Icons
-import { FaRegStar, FaStar } from "react-icons/fa"
-import ReactStars from "react-rating-stars-component"
+ 
 import { Link } from "react-router"
 
 import GetAvgRating from "../../../utils/avgRating"

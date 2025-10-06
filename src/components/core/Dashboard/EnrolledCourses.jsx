@@ -16,7 +16,7 @@ export default function EnrolledCourses() {
     ;(async () => {
       try {
         const res = await getUserEnrolledCourses(token) // Getting all the published and the drafted courses
-        console.log("Enrolled Courses:", res)
+       // console.log("Enrolled Courses:", res)
         // Filtering the published course out
         const filterPublishCourse = res.filter((ele) => ele.status !== "Draft")
         // console.log(
