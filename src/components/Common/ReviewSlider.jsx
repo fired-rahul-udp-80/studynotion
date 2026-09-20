@@ -36,11 +36,11 @@ function ReviewSlider() {
   // console.log(reviews)
 
   return (
-    <div className="text-white">
-      <div className="my-[50px] h-[184px] max-w-maxContentTab lg:max-w-maxContent">
+    <div className="review-slider text-white">
+      <div className="review-slider__viewport">
         <Swiper
-          slidesPerView={4}
-          spaceBetween={25}
+          slidesPerView={1.15}
+          spaceBetween={16}
           loop={true}
           freeMode={true}
           autoplay={{
@@ -48,30 +48,41 @@ function ReviewSlider() {
             disableOnInteraction: false,
           }}
           modules={[FreeMode, Pagination, Autoplay]}
-          className="w-full "
+          breakpoints={{
+            640: { slidesPerView: 2.15, spaceBetween: 18 },
+            1024: { slidesPerView: 3.15, spaceBetween: 20 },
+            1280: { slidesPerView: 4, spaceBetween: 22 },
+          }}
+          className="w-full"
         >
           {reviews.map((review, i) => {
             return (
-              <SwiperSlide key={i} className="!w-auto">
-                <div className="h-full w-full rounded-md bg-richblack-800 p-4 shadow-md transition-all duration-300 hover:scale-[1.02] flex flex-col justify-between gap-3 text-richblack-25 text-sm">
-                  <div className="flex items-center gap-4">
+              <SwiperSlide key={i} className="review-slider__slide">
+                <article className="review-card">
+                  <div className="review-card__topline">
+                    <span className="review-card__quote" aria-hidden="true">
+                      “
+                    </span>
+                    <span className="review-card__index">0{i + 1}</span>
+                  </div>
+                  <div className="review-card__author">
                     <img
                       src={
                         review?.user?.image
                           ? review?.user?.image
                           : `https://api.dicebear.com/5.x/initials/svg?seed=${review?.user?.firstName} ${review?.user?.lastName}`
                       }
-                      alt=""
-                      className="h-9 w-9 rounded-full object-cover"
+                      alt={`${review?.user?.firstName} ${review?.user?.lastName}`}
+                      className="review-card__avatar"
                     />
-                    <div className="flex flex-col">
-                      <h1 className="font-semibold text-richblack-5">{`${review?.user?.firstName} ${review?.user?.lastName}`}</h1>
-                      <h2 className="text-[12px] font-medium text-richblack-500">
+                    <div>
+                      <h3 className="review-card__name">{`${review?.user?.firstName} ${review?.user?.lastName}`}</h3>
+                      <p className="review-card__course">
                         {review?.course?.courseName}
-                      </h2>
+                      </p>
                     </div>
                   </div>
-                  <p className="font-medium text-richblack-25">
+                  <p className="review-card__copy">
                     {review?.review.split(" ").length > truncateWords
                       ? `${review?.review
                           .split(" ")
@@ -79,21 +90,21 @@ function ReviewSlider() {
                           .join(" ")} ...`
                       : `${review?.review}`}
                   </p>
-                  <div className="flex items-center gap-2 ">
-                    <h3 className="font-semibold text-yellow-100">
+                  <div className="review-card__rating">
+                    <strong>
                       {review.rating.toFixed(1)}
-                    </h3>
+                    </strong>
                     <ReactStars
                       count={5}
                       value={review.rating}
                       size={20}
                       edit={false}
-                      activeColor="#ffd700"
+                      activeColor="#FFD60A"
                       emptyIcon={<FaStar />}
                       fullIcon={<FaStar />}
                     />
                   </div>
-                </div>
+                </article>
               </SwiperSlide>
             )
           })}

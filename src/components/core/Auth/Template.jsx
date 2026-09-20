@@ -50,8 +50,8 @@ function Template({ title, description1, description2, image, formType }) {
               <span className="text-richblack-100">Password:</span>{" "}123456
             </div>
             <div className="text-richblack-100 text-sm">
-              <span className="text-richblack-100">Email:</span> govind@gmail.com (Instructor){" "} 
-              <span className="text-richblack-100">Password:</span>{" "}123456
+              <span className="text-richblack-100">Email:</span> rr3206277@gmail.com (Instructor){" "} 
+              <span className="text-richblack-100">Password:</span>{" "}12345
             </div>  
           </div>
 
