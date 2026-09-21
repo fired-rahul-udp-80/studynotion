@@ -34,13 +34,20 @@ body {
 }
 
 .explore-more {
+  box-sizing: border-box;
+  min-width: 0;
   position: relative;
   width: 100%;
+  max-width: 100%;
+  overflow: hidden;
   padding: 2rem 0 5rem;
   color: #f1f2ff;
 }
 
 .explore-more__intro {
+  box-sizing: border-box;
+  max-width: 100%;
+  padding: 0 1rem;
   position: relative;
   margin: 0 auto 2.5rem;
   text-align: center;
@@ -56,6 +63,7 @@ body {
 }
 
 .explore-more__tabs {
+  box-sizing: border-box;
   display: flex;
   gap: 0.4rem;
   width: fit-content;
@@ -107,6 +115,8 @@ body {
 }
 
 .explore-more__selection {
+  box-sizing: border-box;
+  min-width: 0;
   display: flex;
   align-items: center;
   gap: 0.8rem;
@@ -120,6 +130,8 @@ body {
 }
 
 .explore-more__selection strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
   color: #ffd60a;
   font-size: 0.8rem;
 }
@@ -131,6 +143,8 @@ body {
 }
 
 .explore-more__cards {
+  box-sizing: border-box;
+  min-width: 0;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
@@ -140,6 +154,8 @@ body {
 }
 
 .explore-course-card {
+  box-sizing: border-box;
+  min-width: 0;
   position: relative;
   min-height: 19rem;
   overflow: hidden;
@@ -187,6 +203,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 1.2rem 1.35rem;
+  min-width: 0;
 }
 
 .explore-course-card__topline {
@@ -207,6 +224,7 @@ body {
 }
 
 .explore-course-card__body {
+  min-width: 0;
   min-height: 12rem;
   padding: 0.8rem 1.35rem 1rem;
   border-bottom: 1px dashed rgba(255, 255, 255, 0.28);
@@ -217,6 +235,7 @@ body {
 }
 
 .explore-course-card__body h3 {
+  overflow-wrap: anywhere;
   margin-bottom: 0.85rem;
   font-family: Georgia, serif;
   font-size: 1.65rem;
@@ -224,6 +243,7 @@ body {
 }
 
 .explore-course-card__body p {
+  overflow-wrap: anywhere;
   color: #afb2bf;
   font-size: 0.88rem;
   line-height: 1.65;
@@ -244,6 +264,7 @@ body {
 }
 
 .explore-course-card__footer div {
+  min-width: 0;
   display: flex;
   align-items: center;
   gap: 0.4rem;
@@ -255,6 +276,8 @@ body {
 }
 
 .explore-more__detail {
+  box-sizing: border-box;
+  min-width: 0;
   display: grid;
   grid-template-columns: auto minmax(8rem, 0.35fr) 1fr auto;
   align-items: center;
@@ -274,12 +297,16 @@ body {
 }
 
 .explore-more__detail strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
   color: #f1f2ff;
   font-family: Georgia, serif;
   font-size: 1.15rem;
 }
 
 .explore-more__detail > span:not(.explore-more__detail-kicker) {
+  min-width: 0;
+  overflow-wrap: anywhere;
   font-size: 0.8rem;
   line-height: 1.5;
 }
@@ -296,12 +323,15 @@ body {
 
   .explore-more__tabs {
     width: calc(100% - 2rem);
+    max-width: calc(100% - 2rem);
     border-radius: 0.35rem;
   }
 
   .explore-more__selection {
     flex-wrap: wrap;
     gap: 0.5rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
   }
 
   .explore-more__selection-line {
@@ -596,12 +626,19 @@ details > summary::-webkit-details-marker {
 }
 
 .review-slider {
+  box-sizing: border-box;
+  min-width: 0;
   width: 100%;
+  max-width: 100%;
+  overflow: hidden;
   padding: 1rem 0 2rem;
 }
 
 .review-slider__viewport {
+  box-sizing: border-box;
+  min-width: 0;
   width: 100%;
+  max-width: 100%;
   max-width: 76rem;
   min-height: 15rem;
   margin: 0 auto;
@@ -610,10 +647,13 @@ details > summary::-webkit-details-marker {
 }
 
 .review-slider__slide {
+  box-sizing: border-box;
+  min-width: 0;
   height: auto !important;
 }
 
 .review-card {
+  box-sizing: border-box;
   position: relative;
   display: flex;
   min-height: 14.5rem;
@@ -735,8 +775,13 @@ details > summary::-webkit-details-marker {
 
 @media (max-width: 640px) {
   .review-slider__viewport {
-    padding-right: 1rem;
-    padding-left: 1rem;
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  .review-card {
+    min-height: 13.5rem;
+    padding: 1.1rem 1rem 1rem;
   }
 }
 /* .swiper-slide {
